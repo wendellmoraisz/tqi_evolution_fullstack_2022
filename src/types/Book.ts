@@ -3,5 +3,5 @@ export default interface Book {
     author: string
     publishingCompany: string
     bookImgSrc: string
-    publicationYear: string
+    publicationYear: number
 }
