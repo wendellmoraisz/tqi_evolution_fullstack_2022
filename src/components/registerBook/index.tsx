@@ -1,6 +1,7 @@
 import { useState } from "react";
 import registerBook from "../../services/registerBook";
 import Book from "../../types/Book";
+import BookForm from "../bookForm/BookForm";
 
 const RegisterBook = () => {
 
@@ -29,38 +30,12 @@ const RegisterBook = () => {
 
     return (
         <div>
-            <div>
-                <input
-                    type="text"
-                    value={inputValues.title}
-                    onChange={e => handleInputValue(e, "title")}
-                    placeholder="título"
+            <div style={{ display: "flex", "flexDirection": "column", gap: "16px" }}>
+                <BookForm
+                    inputChange={handleInputValue}
+                    inputValues={inputValues}
+                    buttonClickAction={addBook}
                 />
-                <input
-                    type="text"
-                    value={inputValues.author}
-                    onChange={e => handleInputValue(e, "author")}
-                    placeholder="autor"
-                />
-                <input
-                    type="text"
-                    value={inputValues.publishingCompany}
-                    onChange={e => handleInputValue(e, "publishingCompany")}
-                    placeholder="editora"
-                />
-                <input
-                    type="text" 
-                    value={inputValues.bookImgSrc}
-                    onChange={e => handleInputValue(e, "bookImgSrc")}
-                    placeholder="url da imagem do livro"
-                />
-                <input
-                    type="number"
-                    value={inputValues.publicationYear}
-                    onChange={e => handleInputValue(e, "publicationYear")}
-                    placeholder="ano de publicação"
-                />
-                <button onClick={addBook}>confirmar</button>
             </div>
         </div>
     )
