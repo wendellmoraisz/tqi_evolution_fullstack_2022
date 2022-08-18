@@ -1,6 +1,6 @@
 import BookFormProps from "../../types/BookformProps";
 
-const BookForm = ({ inputChange, inputValues, buttonClickAction }: BookFormProps) => {
+const BookForm = ({ inputChange, inputValues }: BookFormProps) => {
 
     return (
         <>
@@ -34,7 +34,6 @@ const BookForm = ({ inputChange, inputValues, buttonClickAction }: BookFormProps
                 onChange={e => inputChange(e, "publicationYear")}
                 placeholder="Ano de publicação"
             />
-            <button onClick={buttonClickAction}>Confirmar</button>
         </>
     )
 }

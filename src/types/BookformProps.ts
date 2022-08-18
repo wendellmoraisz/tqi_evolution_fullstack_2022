@@ -5,5 +5,4 @@ export default interface BookFormProps {
         stateProperty: 
         "title" | "author" | "publishingCompany" | "bookImgSrc" | "publicationYear") => void
     inputValues: Book
-    buttonClickAction: () => void
 }
