@@ -1,7 +1,8 @@
 import Purchase from "../types/Purchase";
+import apiUrl from "../utils/apiURL";
 
 const createPurchase = async (bodyRequest: Purchase) => {
-    const result = await fetch("http://localhost:8080/compras", {
+    const result = await fetch(`${apiUrl}/compras`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bodyRequest),

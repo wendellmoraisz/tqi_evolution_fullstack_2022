@@ -1,8 +1,9 @@
 import Client from "../types/Client";
+import apiUrl from "../utils/apiURL";
 
 const registerClient = async (client: Client) => {
 
-    const response = await fetch("http://localhost:8080/clientes", {
+    const response = await fetch(`${apiUrl}/clientes`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(client),

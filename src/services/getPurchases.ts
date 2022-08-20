@@ -1,7 +1,8 @@
 import Purchase from "../types/Purchase";
+import apiUrl from "../utils/apiURL";
 
 const getPurchases = async (): Promise<Purchase[]> => {
-    const result = await fetch("http://localhost:8080/compras");
+    const result = await fetch(`${apiUrl}/compras`);
     const data = await result.json();
     return data;
 }
