@@ -1,9 +1,12 @@
-import React from 'react';
 import SideBarMenu from './components/sideMenu';
+import AppRoutes from './routes';
 
 function App() {
   return (
-    <SideBarMenu/>
+    <div style={{ display: "flex", alignItems: "center" }}>
+      <SideBarMenu />
+      <AppRoutes/>
+    </div>
   );
 }
 
