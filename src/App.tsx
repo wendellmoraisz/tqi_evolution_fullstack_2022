@@ -1,11 +1,14 @@
 import SideBarMenu from './components/sideMenu';
 import AppRoutes from './routes';
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
-      <SideBarMenu />
-      <AppRoutes/>
+      <BrowserRouter>
+        <SideBarMenu />
+        <AppRoutes />
+      </BrowserRouter>
     </div>
   );
 }

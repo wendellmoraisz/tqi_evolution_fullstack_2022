@@ -7,14 +7,12 @@ import CreatePurchaseForm from "./components/CreatePurchaseForm";
 const AppRoutes = () => {
 
     return (
-        <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="nova-venda" element={<CreateSaleForm />} />
                 <Route path="cadastrar-livro" element={<RegisterBook />} />
                 <Route path="fazer-pedido" element={<CreatePurchaseForm />} />
             </Routes>
-        </BrowserRouter>
     )
 }
 
