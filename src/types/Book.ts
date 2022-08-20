@@ -1,5 +1,5 @@
 export default interface Book {
-    id?: number
+    id?: number | null
     title: string
     author: string
     publishingCompany: string
