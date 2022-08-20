@@ -64,7 +64,6 @@ const CreateSaleForm = () => {
     }
 
     useEffect(() => {
-        console.log("venda", sale);
         if (isUpload) createSale(sale).then(() => setIsUpload(false));
     }, [sale.client, sale.books]);
 
@@ -96,6 +95,7 @@ const CreateSaleForm = () => {
 
     return (
         <div>
+            <h1>Lançar venda</h1>
             <h2>Cliente</h2>
             <div>
                 <h3>O cliente já está cadastrado?</h3>
@@ -144,6 +144,9 @@ const CreateSaleForm = () => {
                     </>
                 ))}
             </div>
+            <h3>Valor total</h3>
+            R$
+            <input onChange={e => setSale(prev => ({...prev, price: Number(e.target.value)}))} type="number" name="" id="" />
             <button onClick={addSale}>confirmar</button>
         </div >
     )
