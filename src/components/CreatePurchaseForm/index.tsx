@@ -5,6 +5,7 @@ import registerBook from "../../services/registerBook";
 import Book from "../../types/Book";
 import Purchase from "../../types/Purchase";
 import BookForm from "../bookForm/BookForm";
+import bookDefaultvalues from "../../common/bookDefaultValue";
 
 const CreatePurchaseForm = () => {
 
@@ -14,14 +15,6 @@ const CreatePurchaseForm = () => {
         book: {
             id: null
         }
-    }
-
-    const bookDefaultvalues = {
-        title: "",
-        author: "",
-        publishingCompany: "",
-        bookImgSrc: "",
-        publicationYear: 0,
     }
 
     const [purchaseValues, setPurchaseValues] = useState<Purchase>(inputDefaultValues);
@@ -94,7 +87,7 @@ const CreatePurchaseForm = () => {
                 {bookAlreadyRegistered ?
                     <select onChange={e => setBookId(Number(e.target.value))} name="" id="">
                         <option disabled selected >Selecionar livro</option>
-                        {allBooks.map(book => <option key={book.id} value={book.id}>{`${book.title} - ${book.author}`}</option>)}
+                        {allBooks.map(book => <option key={book.id} value={book.id ?? 0}>{`${book.title} - ${book.author}`}</option>)}
                     </select>
                     :
                     <>

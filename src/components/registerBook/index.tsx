@@ -2,20 +2,13 @@ import { useState } from "react";
 import registerBook from "../../services/registerBook";
 import Book from "../../types/Book";
 import BookForm from "../bookForm/BookForm";
+import bookDefaultvalues from "../../common/bookDefaultValue";
 
 const RegisterBook = () => {
 
-    const inputDefaultValue = {
-        title: "",
-        author: "",
-        publishingCompany: "",
-        bookImgSrc: "",
-        publicationYear: 0,
-    }
+    const [inputValues, setInputValues] = useState<Book>(bookDefaultvalues);
 
-    const [inputValues, setInputValues] = useState<Book>(inputDefaultValue);
-
-    const clearInputs = () => setInputValues(inputDefaultValue);
+    const clearInputs = () => setInputValues(bookDefaultvalues);
 
     const addBook = () => {
         registerBook(inputValues);
@@ -33,9 +26,9 @@ const RegisterBook = () => {
             <div style={{ display: "flex", "flexDirection": "column", gap: "16px" }}>
                 <BookForm
                     inputChange={handleInputValue}
-                    inputValues={inputValues}
-                    buttonClickAction={addBook}
+                    inputValues={inputValues}                    
                 />
+            <button onClick={addBook}>Confirmar</button>
             </div>
         </div>
     )

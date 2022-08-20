@@ -6,17 +6,9 @@ import registerClient from "../../services/registerClient";
 import BookSale from "../../types/BookSale";
 import Client from "../../types/Client";
 import Sale from "../../types/Sale";
+import bookDefaultvalues from "../../common/bookDefaultValue";
 
 const CreateSaleForm = () => {
-
-    const bookDefaultvalues = {
-        title: "",
-        author: "",
-        publishingCompany: "",
-        bookImgSrc: "",
-        publicationYear: 0,
-        quantity: 0,
-    }
 
     const clientDefaultValue = {
         name: "",
