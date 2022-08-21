@@ -7,6 +7,11 @@ import BookSale from "../../types/BookSale";
 import Client from "../../types/Client";
 import Sale from "../../types/Sale";
 import bookDefaultvalues from "../../common/bookDefaultValue";
+import * as S from "./styles";
+import StyledConfirmButton from "../../styles/StyledConfirmButton";
+import StyledSelect from "../../styles/StyledSelect";
+import StyledInput from "../../styles/StyledInput";
+import StyledLabel from "../../styles/StyledLabel";
 
 const CreateSaleForm = () => {
 
@@ -86,61 +91,81 @@ const CreateSaleForm = () => {
     }
 
     return (
-        <div>
-            <h1>Lançar venda</h1>
-            <h2>Cliente</h2>
+        <S.Container>
             <div>
-                <h3>O cliente já está cadastrado?</h3>
-                <input checked={clientIsAlreadyRegistered} onChange={() => setClientIsAlreadyRegistered(!clientIsAlreadyRegistered)} type="radio" name="bookIsCreated" id="yes" />
-                <label htmlFor="yes">Sim</label>
-                <input checked={!clientIsAlreadyRegistered} onChange={() => setClientIsAlreadyRegistered(!clientIsAlreadyRegistered)} type="radio" name="bookIsCreated" id="no" />
-                <label htmlFor="no">Não</label>
-            </div>
-            {!clientIsAlreadyRegistered ?
+
+                <h1>Lançar venda</h1>
+                <h2>Cliente</h2>
                 <div>
-                    <p>Nome</p>
-                    <input onChange={e => handleClientValues(e, "name")} type="text" />
-                    <p>CPF</p>
-                    <input onChange={e => handleClientValues(e, "cpf")} type="number" maxLength={11} />
-                    <p>Número de telefone</p>
-                    <input onChange={e => handleClientValues(e, "phoneNumber")} type="text" />
-                    <p>Endereço</p>
-                    <input onChange={e => handleClientValues(e, "address")} type="text" />
+                    <h3>O cliente já está cadastrado?</h3>
+                    <div style={{ display: "flex" }}>
+                        <S.RadioInput
+                            checked={clientIsAlreadyRegistered}
+                            onChange={() => setClientIsAlreadyRegistered(!clientIsAlreadyRegistered)}
+                            type="radio"
+                            name="bookIsCreated"
+                            id="yes" />
+                        <StyledLabel style={{ background: clientIsAlreadyRegistered ? "#32E0CF" : "#fff" }} htmlFor="yes">
+                            <span>Sim</span>
+                        </StyledLabel>
+
+                        <S.RadioInput checked={!clientIsAlreadyRegistered} onChange={() => setClientIsAlreadyRegistered(!clientIsAlreadyRegistered)} type="radio" name="bookIsCreated" id="no" />
+                        <StyledLabel htmlFor="no" style={{ background: clientIsAlreadyRegistered ? "#fff" : "#32E0CF" }}>
+                            <span>Não</span>
+                        </StyledLabel>
+                    </div>
                 </div>
-                :
-                <select onChange={e => setSale(prev => ({ ...prev, client: { id: Number(e.target.value) } }))}>
-                    <option disabled selected>Selecionar cliente</option>
-                    {allClients.map(client => (
-                        <option value={client.id}>{client.name} - {client.phoneNumber}</option>
-                    ))}
-                </select>
-            }
+                {!clientIsAlreadyRegistered ?
+                    <div>
+                        <p>Nome</p>
+                        <StyledInput onChange={e => handleClientValues(e, "name")} type="text" />
+                        <p>CPF</p>
+                        <StyledInput onChange={e => handleClientValues(e, "cpf")} type="number" maxLength={11} />
+                        <p>Número de telefone</p>
+                        <StyledInput onChange={e => handleClientValues(e, "phoneNumber")} type="text" />
+                        <p>Endereço</p>
+                        <StyledInput onChange={e => handleClientValues(e, "address")} type="text" />
+                    </div>
+                    :
+                    <StyledSelect onChange={e => setSale(prev => ({ ...prev, client: { id: Number(e.target.value) } }))}>
+                        <option disabled selected>Selecionar cliente</option>
+                        {allClients.map(client => (
+                            <option value={client.id}>{client.name} - {client.phoneNumber}</option>
+                        ))}
+                    </StyledSelect>
+                }
+                <div>
+                    <h2>Livros</h2>
+                    <StyledSelect onChange={e => addBook(Number(e.target.value))}>
+                        <option disabled selected>Selecionar livro</option>
+                        {allBooks.map(book => (
+                            <option value={book.id ?? 0}>{book.title} - {book.author}</option>
+                        ))}
+                    </StyledSelect>
+                </div>
+                <h3>Valor total</h3>
+                <span style={{ marginRight: "8px" }}>R$</span>
+                <StyledInput style={{ marginRight: "8px" }} onChange={e => setSale(prev => ({ ...prev, price: Number(e.target.value) }))} type="number" name="" id="" />
+                <StyledConfirmButton onClick={addSale}>confirmar</StyledConfirmButton>
+            </div>
             <div>
-                <h2>Livros</h2>
-                <select onChange={e => addBook(Number(e.target.value))}>
-                    <option disabled selected>Selecionar livro</option>
-                    {allBooks.map(book => (
-                        <option value={book.id ?? 0}>{book.title} - {book.author}</option>
-                    ))}
-                </select>
                 <h3>Livros selecionados</h3>
                 {books.map((book, index) => (
                     <>
                         <p key={index}>{book.title} - {book.author}</p>
-                        <div>
-                            <button onClick={() => changeBookQuantity(book.id as number, "decrement")}>-</button>
-                            <span>{book.quantity}</span>
-                            <button onClick={() => changeBookQuantity(book.id as number, "encrement")}>+</button>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                            <p>Quantidade:</p>
+                            <div>
+                                <S.HandleQuantityButton onClick={() => changeBookQuantity(book.id as number, "decrement")}>-</S.HandleQuantityButton>
+                                <span>{book.quantity}</span>
+                                <S.HandleQuantityButton onClick={() => changeBookQuantity(book.id as number, "encrement")}>+</S.HandleQuantityButton>
+                            </div>
                         </div>
-                        <button onClick={() => removeBook(book.id as number)}>remover</button>
+                        <S.RemoveButton onClick={() => removeBook(book.id as number)}>Remover</S.RemoveButton>
                     </>
                 ))}
             </div>
-            <h3>Valor total</h3>
-            R$
-            <input onChange={e => setSale(prev => ({...prev, price: Number(e.target.value)}))} type="number" name="" id="" />
-            <button onClick={addSale}>confirmar</button>
-        </div >
+        </S.Container >
     )
 }
 
