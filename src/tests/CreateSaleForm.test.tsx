@@ -3,7 +3,7 @@ import CreateSaleForm from "../components/createSaleform";
 
 describe("Create Sale Component", () => {
     
-    it("should ren", () => {
+    it("should render two header texts", () => {
         const { getByText } = render(<CreateSaleForm />);
         expect(getByText("O cliente já está cadastrado?")).toBeInTheDocument;
         expect(getByText("Valor total")).toBeInTheDocument;

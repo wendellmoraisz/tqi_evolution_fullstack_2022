@@ -3,7 +3,7 @@ import CreatePurchaseForm from "../components/CreatePurchaseForm";
 
 describe("Create Sale Component", () => {
 
-    it("should ren", () => {
+    it("should render two header texts", () => {
         const { getByText } = render(<CreatePurchaseForm />);
         expect(getByText("O livro já está cadastrado?")).toBeInTheDocument;
         expect(getByText("Fazer Pedido")).toBeInTheDocument;
