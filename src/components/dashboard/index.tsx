@@ -4,6 +4,7 @@ import getClients from "../../services/getClients";
 import getPurchases from "../../services/getPurchases";
 import getSales from "../../services/getSales";
 import Sale from "../../types/Sale";
+import * as S from "./styles";
 
 const Dashboard = () => {
 
@@ -31,25 +32,35 @@ const Dashboard = () => {
 
     return (
         <div>
-            <h1>Olá =D</h1>
-            <div>
-                <h2>Total de livros cadastrados</h2>
-                <h2>{booksQuantity}</h2>
-            </div>
-            <div>
-                <h2>Total de clientes cadastrados</h2>
-                <h2>{clientsQuantity}</h2>
-            </div>
-            <div>
-                <h2>Valor total vendido</h2>
-                <h2>{`R$${allSales.length ?
-                    allSales.map(sale => sale.price).reduce((value, nextValue) => value + nextValue) : 0}`}</h2>
-            </div>
-            <div>
-                <h2>Total de pedidos</h2>
-                <h2>{purchasesQuantity}</h2>
-            </div>
+            <S.Title>Olá <span>=D</span></S.Title>
+            <S.Container>
+                <S.StatesContainer>
+                    <h2>Livros cadastrados</h2>
+                    <span>
+                        <h2>{booksQuantity}</h2>
+                    </span>
+                </S.StatesContainer>
+                <S.StatesContainer>
+                    <h2>Clientes</h2>
+                    <span>
+                        <h2>{clientsQuantity}</h2>
+                    </span>
+                </S.StatesContainer>
+                <S.StatesContainer>
+                    <h2>Valor total vendido</h2>
+                    <span>
+                        <h2>{`R$${allSales.length ?
+                            allSales.map(sale => sale.price).reduce((value, nextValue) => value + nextValue) : 0}`}</h2>
+                    </span>
+                </S.StatesContainer>
+                <S.StatesContainer>
+                    <h2>Total de pedidos</h2>
+                    <span>
+                        <h2>{purchasesQuantity}</h2>
+                    </span>
+                </S.StatesContainer>
 
+            </S.Container>
         </div>
     )
 }
