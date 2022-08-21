@@ -6,6 +6,10 @@ import Book from "../../types/Book";
 import Purchase from "../../types/Purchase";
 import BookForm from "../bookForm/BookForm";
 import bookDefaultvalues from "../../common/bookDefaultValue";
+import StyledConfirmButton from "../../styles/StyledConfirmButton";
+import StyledInput from "../../styles/StyledInput";
+import StyledSelect from "../../styles/StyledSelect";
+import StyledLabel from "../../styles/StyledLabel";
 
 const CreatePurchaseForm = () => {
 
@@ -64,41 +68,42 @@ const CreatePurchaseForm = () => {
     return (
         <div>
             <div>
-                <h1>Fazer Pedido</h1>
+                <h1 style={{ fontWeight: "300", marginBottom: "20px" }}>Fazer Pedido</h1>
                 <p>Quanitidade de exemplares</p>
-                <input
+                <StyledInput
                     type="number"
                     value={purchaseValues.quantity}
                     onChange={e => setPurchaseValues(prev => ({ ...prev, quantity: Number(e.target.value) }))}
                 />
                 <p>Valor unitário</p>
-                <input
+                <StyledInput
                     type="number"
                     onChange={e => setPurchaseValues(prev => ({ ...prev, unityValue: Number(e.target.value) }))}
                     value={purchaseValues.unityValue}
                 />
                 <div>
-                    <h3>O livro já está cadastrado?</h3>
-                    <input checked={bookAlreadyRegistered} onChange={() => setBookAlreadyRegistered(!bookAlreadyRegistered)} type="radio" name="bookIsCreated" id="yes" />
-                    <label htmlFor="yes">Sim</label>
-                    <input checked={!bookAlreadyRegistered} onChange={() => setBookAlreadyRegistered(!bookAlreadyRegistered)} type="radio" name="bookIsCreated" id="no" />
-                    <label htmlFor="no">Não</label>
+                    <h3 style={{ fontWeight: "400" }}>O livro já está cadastrado?</h3>
+                    <div style={{ display: "flex" }}>
+                        <StyledLabel style={{ background: bookAlreadyRegistered ? "#32E0CF" : "#fff" }} htmlFor="yes">Sim</StyledLabel>
+                        <input style={{ display: "none" }} checked={bookAlreadyRegistered} onChange={() => setBookAlreadyRegistered(!bookAlreadyRegistered)} type="radio" name="bookIsCreated" id="yes" />
+                        <StyledLabel style={{ background: bookAlreadyRegistered ? "#fff" : "#32E0CF" }} htmlFor="no">Não</StyledLabel>
+                        <input style={{ display: "none" }} checked={!bookAlreadyRegistered} onChange={() => setBookAlreadyRegistered(!bookAlreadyRegistered)} type="radio" name="bookIsCreated" id="no" />
+                    </div>
                 </div>
                 {bookAlreadyRegistered ?
-                    <select onChange={e => setBookId(Number(e.target.value))} name="" id="">
+                    <StyledSelect style={{ marginRight: "8px" }} onChange={e => setBookId(Number(e.target.value))}>
                         <option disabled selected >Selecionar livro</option>
                         {allBooks.map(book => <option key={book.id} value={book.id ?? 0}>{`${book.title} - ${book.author}`}</option>)}
-                    </select>
+                    </StyledSelect>
                     :
                     <>
-                        <h3>Cadastrar Livro</h3>
                         <BookForm
                             inputValues={bookValues}
                             inputChange={handleBookValues}
                         />
                     </>
                 }
-                <button onClick={addPurchase}>Confirmar</button>
+                <StyledConfirmButton style={{ marginLeft: "8px" }} onClick={addPurchase}>Confirmar</StyledConfirmButton>
             </div>
         </div>
     )
