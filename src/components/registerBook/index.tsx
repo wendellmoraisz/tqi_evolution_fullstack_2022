@@ -3,6 +3,7 @@ import registerBook from "../../services/registerBook";
 import Book from "../../types/Book";
 import BookForm from "../bookForm/BookForm";
 import bookDefaultvalues from "../../common/bookDefaultValue";
+import StyledConfirmButton from "../../styles/StyledConfirmButton";
 
 const RegisterBook = () => {
 
@@ -28,7 +29,7 @@ const RegisterBook = () => {
                     inputChange={handleInputValue}
                     inputValues={inputValues}                    
                 />
-            <button onClick={addBook}>Confirmar</button>
+            <StyledConfirmButton onClick={addBook}>Confirmar</StyledConfirmButton>
             </div>
         </div>
     )
